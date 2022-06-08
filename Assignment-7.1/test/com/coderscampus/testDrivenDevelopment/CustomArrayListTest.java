@@ -1,4 +1,5 @@
-package com.coderscampus.lesson1;
+package com.coderscampus.testDrivenDevelopment;
+
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -7,9 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.coderscampus.testDrivenDevelopment.CustomArrayList;
+import com.coderscampus.testDrivenDevelopment.CustomList;
+
 public class CustomArrayListTest {
 
 	private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+	//private static final String ALPHABET = "abc";
 	// sut is system under test
 	private CustomList<Character> sut;
 
@@ -17,14 +22,14 @@ public class CustomArrayListTest {
 	void init_before_every_test() {
 		System.out.println("Initiating the arrange of the test");
 		sut = new CustomArrayList<>();
-		// String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		 String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 		for (int i = 0; i < ALPHABET.length(); i++) {
 			sut.add(ALPHABET.charAt(i));
 
 		}
 	}
-
+//https://stackoverflow.com/questions/11638123/how-to-add-an-element-to-array-and-shift-indexes
 	@Test
 	void should_verify_that_all_characters_are_lowercase() {
 
@@ -35,7 +40,7 @@ public class CustomArrayListTest {
 		for (int i = 0; i < sut.getSize(); i++) {
 
 			if (sut.get(i).equals(ALPHABET.charAt(i))) {
-				System.out.println(sut.get(i).equals(ALPHABET.charAt(i)));
+				System.out.print(sut.get(i).equals(ALPHABET.charAt(i)));
 				numberOfLettersInAlphabet++;
 			}
 		}
@@ -146,6 +151,60 @@ public class CustomArrayListTest {
 
 		}
 	}
+	@Test
+	void the_added_item_with_given_index_should_not_override_the_existing_item_move_array_index_value_over(){
+		/*The issue on the add is that the expected behavior when you add an item 
+		 * on a given index, it should not override the existing item of the index. 
+		 * It should be like an insert and not a replace. 
+		 *
+		// the char array is what the sut custom array should look like after '1' is added in index 0
+		 * 
+		 */
+		char[] letters = new char[]{'1','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		
+		for (int i = 0; i < sut.getSize(); i++) {
+			System.out.print(sut.get(i));
 
+		}
+		System.out.println("\n----------------------------------");
+		sut.add(0,'1');
+
+		// assert
+		for (int index = 0; index < letters.length - 1; index++) {
+			assertEquals(letters[index], sut.get(index));
+
+		}
+		for(int i = 0; i < sut.getSize();i++) {
+			System.out.print(sut.get(i));
+		}
+		System.out.println();
+	}
+	@Test
+	void the_removed_item_should_be_removed_on_the_array(){
+		/*On the remove bug, the issue here is after sut.remove(9) was executed, the value 
+		 * on index 9 should be removed on the array but as you see on the encircled part 
+		 * of the screenshot, the item/value is still there
+		 * */
+		 
+		char[] letters = new char[]{'a','b','c','d','e','f','g','h','i','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		
+		for (int i = 0; i < sut.getSize(); i++) {
+			System.out.print(sut.get(i));
+
+		}
+		System.out.println("\n----------------------------------");
+		sut.remove(9);//remove j
+		
+		
+		for (int i = 0; i < sut.getSize(); i++) {
+			System.out.print(sut.get(i));
+		}
+		
+		for (int index = 0; index < letters.length - 1; index++) {
+			assertEquals(letters[index], sut.get(index));
+
+		}
+		
+		
+	}
 }
-
