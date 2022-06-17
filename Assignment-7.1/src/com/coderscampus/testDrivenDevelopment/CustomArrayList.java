@@ -66,21 +66,27 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
 
-		if (index >= itemCounter) {
+		if (index <= items.length - 1 && index >= 0) {
+			if ((index == items.length - 1)) {
+
+				items = growArray();
+			}
+			T removedItem = (T) items[index];
+
+			for (int i = index; i < itemCounter; i++) {
+				items[i] = items[i + 1];
+			}
+			itemCounter--;
+			return removedItem;
+		} else {
 			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
 		}
-		// 0=[2], 1=[3], 2=[4], 3=null, 4=null ...
-		T removedItem = (T) items[index];
-
-		for (int i = index; i < itemCounter; i++) {
-			items[i] = items[i+1];
-		}
-		itemCounter--;
-		return removedItem;
+		
 	}
 
 	private Object[] growArray() {
-
+        //this method grows the array if the amount of values to fill the 
+		//indexes exceeds the size of the array
 		Object[] backingArray = new Object[items.length * 2];
 		int counter = 0;
 		while (counter < items.length) {
@@ -90,5 +96,28 @@ public class CustomArrayList<T> implements CustomList<T> {
 		return backingArray;
 
 	}
-
+	private Object[] shrinkArray(){
+		//to avoid having too many null indexes, this method shrinks the array when values are 
+		//removed and the index becomes a null value
+		Object [] reducedArray = new Object[items.length/2];
+		for(int i = 0; i<reducedArray.length; i++)
+		{
+			reducedArray[i] = items[i];
+		}
+		 
+		
+		return reducedArray;
+	}
+   private int countAmountofNulls(Object [] array, int count) {
+	   //this method counts the number of nulls starting from the end of the array 
+	   // and then returns that number as an int.
+	   int amount = 0;
+		for(int i = items.length-1; i>count;i--)
+		{
+			if(items[i] == null) {
+				amount++;
+			}
+		}
+		return amount;
+   }
 }

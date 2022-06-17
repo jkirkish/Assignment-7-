@@ -2,27 +2,18 @@ package com.coderscampus.testDrivenDevelopment;
 
 public class ArrayListChecking {
 
-	private static final String ALPHABET = "abcdefgh";
+	private static final String ALPHABET = "abcdefghij";
 	private static CustomList<Character> sut = new CustomArrayList<>();
 	
 	
 	public static void main(String[] args) {
 		
-	   
-       filltheList();
-       showArray();
-       System.out.println("\n---------");
-	   sut.add(3,'x');
-	   sut.add(4,'x');
-	   sut.add(5,'x');
-	   showArray();
-       System.out.println("\n---------");
-	   sut.remove(3);
-	   sut.remove(4);
-	   sut.remove(5);
-	   sut.remove(3);
-	   showArray();
-       System.out.println("\n---------");
+	    
+		filltheList();
+		showArray();
+		sut.remove(10);
+		System.out.println("");
+		showArray();
 		
 		
 		
@@ -32,6 +23,8 @@ public class ArrayListChecking {
 	private static void showArray() {
 		for (int i = 0; i < sut.getSize(); i++) {
             System.out.print(sut.get(i));
+            
+            
            
 		}
 	}
