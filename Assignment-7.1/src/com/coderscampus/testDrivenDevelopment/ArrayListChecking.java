@@ -11,7 +11,10 @@ public class ArrayListChecking {
 	    
 		filltheList();
 		showArray();
-		sut.remove(10);
+		for(int count = 0; count < 5; count++)
+		{
+			sut.remove(count);
+		}
 		System.out.println("");
 		showArray();
 		
