@@ -3,13 +3,9 @@ package com.coderscampus.testDrivenDevelopment;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.Rule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-
 import com.coderscampus.testDrivenDevelopment.CustomArrayList;
 import com.coderscampus.testDrivenDevelopment.CustomList;
 
@@ -19,9 +15,7 @@ public class CustomArrayListTest {
 	// private static final String ALPHABET = "abc";
 	// sut is system under test
 	private CustomList<Character> sut;
-	@SuppressWarnings("deprecation")
-	@Rule
-	public ExpectedException rule = ExpectedException.none();
+	
 
 	void someMethod() throws ArrayIndexOutOfBoundsException{
 		throw new ArrayIndexOutOfBoundsException("Out of Bounds");
@@ -224,12 +218,7 @@ public class CustomArrayListTest {
 	    
 	   sut.remove(27);
 	    
-	   // rule.expect(ArrayIndexOutOfBoundsException.class);
-	    //rule.expectMessage("Out of Bounds");
-	    
-	  //  Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () ->{
-	    //	sut.remove(27);
-	  //  });
+	   assertEquals(25,sut.getSize());
 	   
 	   
    }

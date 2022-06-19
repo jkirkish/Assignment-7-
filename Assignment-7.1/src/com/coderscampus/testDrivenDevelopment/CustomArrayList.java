@@ -73,8 +73,8 @@ public class CustomArrayList<T> implements CustomList<T> {
 			}
 			T removedItem = (T) items[index];
 
-			for (int i = index; i < itemCounter; i++) {
-				items[i] = items[i];
+			for (int i = index; i < itemCounter-1; i++) {
+				items[i] = items[i+1];
 			}
 			itemCounter--;
 			return removedItem;
