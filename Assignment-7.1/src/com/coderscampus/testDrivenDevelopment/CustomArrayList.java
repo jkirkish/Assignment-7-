@@ -1,5 +1,7 @@
 package com.coderscampus.testDrivenDevelopment;
 
+import java.util.Optional;
+
 public class CustomArrayList<T> implements CustomList<T> {
 
 	Object[] items = new Object[10];
@@ -66,19 +68,26 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
 		// System.out.println(items.length);
+		
 		if (index <= items.length - 1 && index >= 0) {
-			if (index == items.length-1) {
-				items = growArray();
-			}
-			// System.out.println(items.length);
-			// System.out.println(countAmountofNulls(items, 0));
 			T removedItem = (T) items[index];
+			
+			if (index == items.length-1) {
+				for (int i = index; i > 0; i--) {
+					items[i] = items[i-1];
+				}
+				items = checkArrayforDuplicatesandReplaceArray(items);
+				itemCounter--;
+				
+				return removedItem;
+			} else {
 
-			for (int i = index; i < itemCounter+1; i++) {
-				items[i] = items[i + 1];
+				for (int i = index; i < itemCounter + 1; i++) {
+					items[i] = items[i + 1];
+				}
+				itemCounter--;
+				return removedItem;
 			}
-			itemCounter--;
-			return removedItem;
 		} else {
 			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
 		}
@@ -97,5 +106,20 @@ public class CustomArrayList<T> implements CustomList<T> {
 		return backingArray;
 
 	}
-
+	private Object[] checkArrayforDuplicatesandReplaceArray(Object[]array) {
+		
+		for(int i = 0; i < array.length; i++) {
+			
+			if(array[i]==array[i+1]) {
+				
+				Object[]copy = new Object[array.length-1];
+				System.arraycopy(array, 0, copy, 0, i);
+				System.arraycopy(array, i+1, copy, i, array.length-i-1);
+				return copy;
+			}
+		}
+		
+		return array;
+	}
 }
+	

@@ -162,10 +162,10 @@ public class CustomArrayListTest {
 		char[] letters = new char[] { '1', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
 				'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
-		//		for (int i = 0; i < sut.getSize(); i++) {
-		//			System.out.print(sut.get(i));
+		// for (int i = 0; i < sut.getSize(); i++) {
+		// System.out.print(sut.get(i));
 		//
-		//		}
+		// }
 		// System.out.println("\n----------------------------------");
 		sut.add(0, '1');
 
@@ -174,9 +174,9 @@ public class CustomArrayListTest {
 			assertEquals(letters[index], sut.get(index));
 
 		}
-		//		for (int i = 0; i < sut.getSize(); i++) {
-		//			System.out.print(sut.get(i));
-		//		}
+		// for (int i = 0; i < sut.getSize(); i++) {
+		// System.out.print(sut.get(i));
+		// }
 		// System.out.println();
 	}
 
@@ -205,33 +205,33 @@ public class CustomArrayListTest {
 	@Test
 	void the_removed_item_at_the_last_index_should_not_be_an_arrayOutOfBounceException() {
 
-		// arranging the customArrayList is set to a size of 10 "abcdefghij"
-		sut1 = new CustomArrayList<>();
-		CustomArrayList sut2 = new CustomArrayList<>();
-	    Character[]lettersChars = {'a','b','c','d','e','f','g','h','i',null};	
-		// index starts at 0.
-		for (int i = 0; i < 10; i++) {
-			sut1.add(ALPHABET.charAt(i));
-            System.out.print(sut1.get(i));
-		}
-		// Act
-		Character itemRemoved = sut1.remove(9);
-		//sut1.add('X');
-		//sut1.add(9, 'Y');
-		//sut1.add(6, 'Z');
-		//sut1.add(3, 'W');
-		System.out.println("-------------\n");
-		for (int i = 0; i < 10; i++) {
-			sut2.add(sut1.get(i));
-            System.out.print(sut1.get(i));
-		}
-		assertEquals('j', itemRemoved);
-		assertEquals(9, sut1.getSize());
-		for (int i = 0; i < 10; i++) {
-			assertEquals(lettersChars[i], sut2.get(i));
-	
-		}
-	
-
+				// arranging the customArrayList is set to a size of 10 "abcdefghij"
+				sut1 = new CustomArrayList<>();
+				CustomArrayList sut2 = new CustomArrayList<>();
+			    Character[]lettersChars = {'a','b','c','d','e','f','g','h','i'};	
+				// index starts at 0.
+				for (int i = 0; i < 10; i++) {
+					sut1.add(ALPHABET.charAt(i));
+		            System.out.print(sut1.get(i) +", ");
+				}
+				// Act
+				Character itemRemoved = sut1.remove(9);
+				//sut1.add('X');
+				//sut1.add(9, 'Y');
+				//sut1.add(6, 'Z');
+				//sut1.add(3, 'W');
+				System.out.println("\n-------------\n");
+				for (int i = 0; i < 9; i++) {
+					sut2.add(sut1.get(i));
+		            System.out.print(sut1.get(i)+", ");
+				}
+				assertEquals('j', itemRemoved);
+				assertEquals(9, sut1.getSize());
+				for (int i = 0; i < 9; i++) {
+					assertEquals(lettersChars[i], sut2.get(i));
+			
+				}
 	}
+
+	
 }
