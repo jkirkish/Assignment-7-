@@ -9,51 +9,42 @@ import org.junit.jupiter.api.Test;
 import com.coderscampus.testDrivenDevelopment.CustomArrayList;
 import com.coderscampus.testDrivenDevelopment.CustomList;
 
+/*Test-Driven Development Methodology
+ * Step 1 - Write a failing test
+ * Step 2 - Write the business logic to make the test pass
+ * Step 3 - Refactor your code
+ * 
+ * Three's A
+ * Arrange, Act, Assert
+ */
 public class CustomArrayListTest {
 
 	private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-	// private static final String ALPHABET = "abc";
+
 	// sut is system under test
 	private CustomList<Character> sut;
-	
+	private CustomList<Character> sut1;
 
-	void someMethod() throws ArrayIndexOutOfBoundsException{
-		throw new ArrayIndexOutOfBoundsException("Out of Bounds");
-	}
-	
 	@BeforeEach
 	void init_before_every_test() {
-		//System.out.println("Initiating the arrange of the test");
+		// Arrange
 		sut = new CustomArrayList<>();
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 		for (int i = 0; i < ALPHABET.length(); i++) {
 			sut.add(ALPHABET.charAt(i));
-           
+
 		}
-		
-		
+
 	}
 
-	//https://stackoverflow.com/questions/11638123/how-to-add-an-element-to-array-and-shift-indexes
 	@Test
-	void should_verify_that_all_characters_are_lowercase() {
+	void should_verify_the_size_of_the_Alphabet_custom_Array_List() {
 
 		// act
-
-		int numberOfLettersInAlphabet = 0;
-		for (int i = 0; i < sut.getSize(); i++) {
-
-			if (sut.get(i).equals(ALPHABET.charAt(i))) {
-				//System.out.print(sut.get(i).equals(ALPHABET.charAt(i)));
-				numberOfLettersInAlphabet++;
-			}
-		}
-		Integer actual = numberOfLettersInAlphabet;
-
-		// Assert
-		Integer expected = 26;
-		assertEquals(expected, actual);
+		Integer size = 26;
+		// assert
+		assertEquals(size, sut.getSize());
 	}
 
 	@Test
@@ -118,7 +109,7 @@ public class CustomArrayListTest {
 			} catch (IndexOutOfBoundsException e) {
 				// Assert
 				assertThat(e.getMessage(), is("Index " + i + " out of bounds for length 40"));
-				System.out.println(e.getMessage());
+				// System.out.println(e.getMessage());
 			}
 			i++;
 		}
@@ -131,7 +122,7 @@ public class CustomArrayListTest {
 			} catch (IndexOutOfBoundsException e) {
 				// Assert
 				assertThat(e.getMessage(), is("Index " + j + " out of bounds for length 40"));
-				System.out.println(e.getMessage());
+				// System.out.println(e.getMessage());
 			}
 			j--;
 		}
@@ -171,11 +162,11 @@ public class CustomArrayListTest {
 		char[] letters = new char[] { '1', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
 				'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
-		for (int i = 0; i < sut.getSize(); i++) {
-			System.out.print(sut.get(i));
-
-		}
-		System.out.println("\n----------------------------------");
+		//		for (int i = 0; i < sut.getSize(); i++) {
+		//			System.out.print(sut.get(i));
+		//
+		//		}
+		// System.out.println("\n----------------------------------");
 		sut.add(0, '1');
 
 		// assert
@@ -183,10 +174,10 @@ public class CustomArrayListTest {
 			assertEquals(letters[index], sut.get(index));
 
 		}
-//		for (int i = 0; i < sut.getSize(); i++) {
-//			System.out.print(sut.get(i));
-//		}
-		//System.out.println();
+		//		for (int i = 0; i < sut.getSize(); i++) {
+		//			System.out.print(sut.get(i));
+		//		}
+		// System.out.println();
 	}
 
 	@Test
@@ -197,29 +188,50 @@ public class CustomArrayListTest {
 		 * encircled part of the screenshot, the item/value is still there
 		 */
 
-		//the char array letters has all the characters in alphabet except for 'j'
+		// the char array letters has all the characters in alphabet except for 'j'
 		char[] letters = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
 				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
-		
-		sut.remove(9);// remove j
+		char removal = sut.remove(9);// remove j
 
 		for (int i = 0; i < sut.getSize(); i++) {
 			assertEquals(letters[i], sut.get(i));
 		}
-
-		assertEquals('k', sut.get(9));
+		assertEquals(removal, 'j'); // j is the character removed from the alphabet array
+		assertEquals('k', sut.get(9));// k is the character that is moved over to take its place
 
 	}
-   @Test
-   void the_removed_item_from_an_index_outside_the_array_size_should_be_arrayOutOfBounceException(){
-	   
-	    assertEquals(26,sut.getSize());
-	    
-	   sut.remove(27);
-	    
-	   assertEquals(25,sut.getSize());
-	   
-	   
-   }
+
+	@Test
+	void the_removed_item_at_the_last_index_should_not_be_an_arrayOutOfBounceException() {
+
+		// arranging the customArrayList is set to a size of 10 "abcdefghij"
+		sut1 = new CustomArrayList<>();
+		CustomArrayList sut2 = new CustomArrayList<>();
+	    Character[]lettersChars = {'a','b','c','d','e','f','g','h','i',null};	
+		// index starts at 0.
+		for (int i = 0; i < 10; i++) {
+			sut1.add(ALPHABET.charAt(i));
+            System.out.print(sut1.get(i));
+		}
+		// Act
+		Character itemRemoved = sut1.remove(9);
+		//sut1.add('X');
+		//sut1.add(9, 'Y');
+		//sut1.add(6, 'Z');
+		//sut1.add(3, 'W');
+		System.out.println("-------------\n");
+		for (int i = 0; i < 10; i++) {
+			sut2.add(sut1.get(i));
+            System.out.print(sut1.get(i));
+		}
+		assertEquals('j', itemRemoved);
+		assertEquals(9, sut1.getSize());
+		for (int i = 0; i < 10; i++) {
+			assertEquals(lettersChars[i], sut2.get(i));
+	
+		}
+	
+
+	}
 }
