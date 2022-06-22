@@ -61,6 +61,12 @@ public class CustomArrayList<T> implements CustomList<T> {
 
 	@Override
 	public T get(int index) throws IndexOutOfBoundsException {
+		
+		for(int i = 0; i < items.length; i++) {
+			if(items[i] == null) {
+			items[i] = Optional.empty();
+		}
+		}
 		// cast the arraylist you want to return to T
 		return (T) items[index];
 	}
@@ -78,7 +84,6 @@ public class CustomArrayList<T> implements CustomList<T> {
 				}
 				items = checkArrayforDuplicatesandReplaceArray(items);
 				itemCounter--;
-				
 				return removedItem;
 			} else {
 
@@ -91,7 +96,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 		} else {
 			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
 		}
-
+	 
 	}
 
 	private Object[] growArray() {
@@ -116,7 +121,9 @@ public class CustomArrayList<T> implements CustomList<T> {
 				System.arraycopy(array, 0, copy, 0, i);
 				System.arraycopy(array, i+1, copy, i, array.length-i-1);
 				return copy;
+				
 			}
+			
 		}
 		
 		return array;

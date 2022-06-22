@@ -3,6 +3,9 @@ package com.coderscampus.testDrivenDevelopment;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -232,6 +235,41 @@ public class CustomArrayListTest {
 			
 				}
 	}
-
-	
+	@Test
+	void the_removed_index_should_be_EmptyOptional_and_not_null() {
+		
+		CustomArrayList sut2 = new CustomArrayList<>();
+	    Character[]lettersChars = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};	
+		System.out.println("lettersChars array");
+	    for (int i = 0; i < 15; i++) {
+			sut2.add(lettersChars[i]);
+       
+		}
+		Character itemRemoved1 = (Character) sut2.remove(14);
+		Character itemRemoved2 = (Character)sut2.remove(13);
+		Character itemRemoved3 = (Character)sut2.remove(12);
+		Character itemRemoved4 = (Character)sut2.remove(11);
+		Character itemRemoved5 = (Character)sut2.remove(10);
+		Character itemRemoved6 = (Character)sut2.remove(9);
+		Character itemRemoved7 = (Character)sut2.remove(8);
+		Character itemRemoved8 = (Character)sut2.remove(7);
+		Character itemRemoved9 = (Character)sut2.remove(6);
+		Character itemRemoved10 = (Character)sut2.remove(5);
+		Character itemRemoved11 = (Character)sut2.remove(4);
+		Character itemRemoved12 = (Character)sut2.remove(3);
+		Character itemRemoved13 = (Character)sut2.remove(2);
+		Character itemRemoved14 = (Character)sut2.remove(1);
+		Character itemRemoved15 = (Character)sut2.remove(0);
+		
+		
+		
+		
+		
+		 for (int index = 0; index < lettersChars.length-1; index++)
+			 assertEquals(sut2.get(index),Optional.empty());
+			 
+	}
+	    
+	    
+		
 }
