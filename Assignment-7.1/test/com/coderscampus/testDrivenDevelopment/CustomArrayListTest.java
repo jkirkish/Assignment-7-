@@ -206,70 +206,65 @@ public class CustomArrayListTest {
 	}
 
 	@Test
-	void the_removed_item_at_the_last_index_should_not_be_an_arrayOutOfBounceException() {
+	void the_removed_item_at_the_last_index_should_equal_the_item_removed_() {
 
-				// arranging the customArrayList is set to a size of 10 "abcdefghij"
-				sut1 = new CustomArrayList<>();
-				CustomArrayList sut2 = new CustomArrayList<>();
-			    Character[]lettersChars = {'a','b','c','d','e','f','g','h','i'};	
-				// index starts at 0.
-				for (int i = 0; i < 10; i++) {
-					sut1.add(ALPHABET.charAt(i));
-		            System.out.print(sut1.get(i) +", ");
-				}
-				// Act
-				Character itemRemoved = sut1.remove(9);
-				//sut1.add('X');
-				//sut1.add(9, 'Y');
-				//sut1.add(6, 'Z');
-				//sut1.add(3, 'W');
-				System.out.println("\n-------------\n");
-				for (int i = 0; i < 9; i++) {
-					sut2.add(sut1.get(i));
-		            System.out.print(sut1.get(i)+", ");
-				}
-				assertEquals('j', itemRemoved);
-				assertEquals(9, sut1.getSize());
-				for (int i = 0; i < 9; i++) {
-					assertEquals(lettersChars[i], sut2.get(i));
-			
-				}
-	}
-	@Test
-	void the_removed_index_should_be_EmptyOptional_and_not_null() {
-		
-		CustomArrayList sut2 = new CustomArrayList<>();
-	    Character[]lettersChars = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};	
-		System.out.println("lettersChars array");
-	    for (int i = 0; i < 15; i++) {
-			sut2.add(lettersChars[i]);
-       
+		// arranging the customArrayList is set to a size of 10 "abcdefghij"
+		sut1 = new CustomArrayList<>();
+
+		Character[] lettersChars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
+		// index starts at 0.
+		for (int i = 0; i < lettersChars.length; i++) {
+			sut1.add(lettersChars[i]);
+
 		}
-		Character itemRemoved1 = (Character) sut2.remove(14);
-		Character itemRemoved2 = (Character)sut2.remove(13);
-		Character itemRemoved3 = (Character)sut2.remove(12);
-		Character itemRemoved4 = (Character)sut2.remove(11);
-		Character itemRemoved5 = (Character)sut2.remove(10);
-		Character itemRemoved6 = (Character)sut2.remove(9);
-		Character itemRemoved7 = (Character)sut2.remove(8);
-		Character itemRemoved8 = (Character)sut2.remove(7);
-		Character itemRemoved9 = (Character)sut2.remove(6);
-		Character itemRemoved10 = (Character)sut2.remove(5);
-		Character itemRemoved11 = (Character)sut2.remove(4);
-		Character itemRemoved12 = (Character)sut2.remove(3);
-		Character itemRemoved13 = (Character)sut2.remove(2);
-		Character itemRemoved14 = (Character)sut2.remove(1);
-		Character itemRemoved15 = (Character)sut2.remove(0);
-		
-		
-		
-		
-		
-		 for (int index = 0; index < lettersChars.length-1; index++)
-			 assertEquals(sut2.get(index),Optional.empty());
-			 
+
+		// Act
+		Character indexedRemoved = sut1.remove(9);
+		// sut1.add('X');
+		// sut1.add(9, 'Y');
+		// sut1.add(6, 'Z');
+		// sut1.add(3, 'W');
+
+		assertEquals('j', indexedRemoved);
+		assertEquals(9, sut1.getSize());
+		for (int i = 0; i < sut1.getSize(); i++) {
+			assertEquals(lettersChars[i], sut1.get(i));
+
+		}
 	}
-	    
-	    
-		
+
+	@Test
+	void the_arrayList_should_be_one_size_less_after_the_removing_an_item() {
+
+		CustomList sut2 = new CustomArrayList<>();
+		Character[] lettersChars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' };
+
+		for (int i = 0; i < lettersChars.length; i++) {
+			sut2.add(lettersChars[i]);
+
+		}
+		assertEquals(15, sut2.getSize());
+		Character itemRemoved1 = (Character) sut2.remove(14);
+
+		assertEquals(14, sut2.getSize());
+
+	}
+
+	@Test
+	void a_chosen_index_outside_the_size_of_the_items_array_should_return_a_null_value_when_removed() {
+
+		// Arrange
+		CustomList sut2 = new CustomArrayList<>();
+		Character[] lettersChars = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' };
+
+		// Act
+		Character Removed1 = (Character) sut2.remove(-1);
+		Character Removed2 = (Character) sut2.remove(16);
+
+		// Assert
+		assertEquals(Removed1, null);
+		assertEquals(Removed2, null);
+
+	}
+
 }
